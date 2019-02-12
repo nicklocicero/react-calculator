@@ -1,0 +1,12 @@
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 4px 24px;
+  flex-grow: 1;
+  border: 1px solid white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 36px;
+  font-family: Monaco, Courier, monospace;
+}
