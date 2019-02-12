@@ -21,7 +21,7 @@ class App extends Component {
       case "÷":
         return value1 / value2;
       default:
-        return this.state.value;
+        return value1;
     }
   };
 
@@ -75,12 +75,15 @@ class App extends Component {
       this.setState({ inputValue: parseInt(value, 10), wasCalculated: false });
     } else {
       const currentDigits = this.state.inputValue;
-      this.setState({ inputValue: parseInt(currentDigits + value, 10) });
+      const newValue = parseInt(currentDigits + value, 10).toString();
+      this.setState({ inputValue: newValue === "" ? "0" : newValue });
     }
   };
 
-  clearInputValueHandler = () => {
-    this.setState({ inputValue: "0" });
+  backspaceHandler = () => {
+    const currentDigits = this.state.inputValue;
+    const newValue = parseInt(currentDigits, 10).toString().substring(0,this.state.inputValue.length-1);
+    this.setState({ inputValue:  newValue === "" ? "0" : newValue });
   };
 
   allClearHandler = () => {
@@ -98,8 +101,8 @@ class App extends Component {
           <Display value={this.state.inputValue} />
         </div>
         <div className="grid">
-          <Button val="AC" action={this.allClearHandler} />
-          <Button val="C" action={this.clearInputValueHandler} />
+          <Button val="C" action={this.allClearHandler} />
+          <Button val="←" action={this.backspaceHandler} />
           <Button val="=" action={() => this.operatorPressHandler("=")} />
           <Button val="-" action={() => this.operatorPressHandler("-")} />
 
